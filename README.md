@@ -2,11 +2,11 @@
 learn basic data structure and practice in python
 
 ## data structure 
-    * [Queue](https://docs.python.org/3/library/queue.html)
-    * Stack
-    * List
-    * Dict(Map)
-    * Tree
+* [Queue](https://docs.python.org/3/library/queue.html)
+* Stack
+* List
+* Dict(Map)
+* Tree
 
 ## Algorithm highlight
 ### Binary Tree DFS
