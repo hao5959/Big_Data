@@ -23,4 +23,5 @@ def preorder(root):
 ```zsh
     brew install pipenv
     pipenv install 
+    pipenv shell
 ```
