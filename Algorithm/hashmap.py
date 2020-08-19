@@ -1,3 +1,5 @@
+# reference: http://zetcode.com/python/hashing/
+
 class User: 
     def __init__(self, name, occupation):
         self.name = name
@@ -38,3 +40,4 @@ if u1 == u2:
     print(f'{u1} == {u2}')
 else:
     print('different')
+    
