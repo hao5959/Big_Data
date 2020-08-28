@@ -1,19 +1,18 @@
 class Solution:
-    def search(self, nums, target):
-        
+    def binarySearch(self, nums, t):
         if not nums: return None
-        
-        start, end = 0, len(nums) - 1
+        l, r = 0, len(nums) - 1
         index = -1
         
-        while start <= end:   
-            mid = start + (end - start)//2    
-            if nums[mid] == target:
-                index = mid
+        while l <= r:
+            m = l + (r - l)//2
+            if nums[m] == t:
+                index = m
                 break
-            elif nums[mid] < target:
-                start = mid + 1
-            else:
-                end = mid - 1
-        return index
-            
+            elif nums[m] < t:
+                l = m + 1
+            else: 
+                r = m - 1
+        print(index)
+res = Solution()
+res.binarySearch([-1, 0, 3, 5, 9, 12], 9)
