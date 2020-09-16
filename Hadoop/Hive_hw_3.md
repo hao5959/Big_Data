@@ -8,3 +8,87 @@ group by b.st
 order by count desc
 limit 5;
 ```
+<img src="https://github.com/hao5959/python/blob/master/Hadoop/images/q1.1.png" width="50%">
+
+- How many banks close each year.
+```sql
+select yr, count(closing_date) closing_count from (
+    select year(b.closing_date) yr, b.closing_date 
+    from banklist_parquet b) a
+group by yr;
+```
+<img src="https://github.com/hao5959/python/blob/master/Hadoop/images/q1.2.png" width="50%">
+
+### Chicago Crime Dataset
+- create parquet table partiton by year
+```sql
+create table crime_parquet_16_20 (
+	id bigint,
+    case_number string,
+    `date` bigint,
+    block string,
+    IUCR string,
+    primary_type string,
+    description string,
+    loc_desc string,
+    arrest boolean,
+    domestic boolean,
+    bead string,
+    district string,
+    ward int,
+    community_area string,
+    FBI_code string,
+    x_coordinate int,
+    y_coordinate int,
+    update_on string,
+    latitude float,
+    longitude float,
+    loc string
+)
+partitioned by (yr int)
+stored as parquet;
+```
+- import data from 2016 to 2020
+```sql
+insert into table crime_parquet_16_20 partition (yr=2016) select 
+    id,
+    case_number,
+    `date`,
+    block,
+    iucr,
+    primary_type,
+    description,
+    loc_desc,
+    arrest,
+    domestic,
+    beat,
+    district,
+    ward,
+    community_area,
+    fbi_code,
+    x_coordinate,
+    y_coordinate,
+    updated_on,
+    latitude,
+    longitude,
+    loc
+from chicago.crime_parquet where yr = 2016;
+```
+- 3
+  - a. Which type of crime is most occurring for each year?
+  ```sql
+  select t.primary_type, t.yr, cnt, r from (
+	select s.primary_type, s.yr, s.cnt, rank() over(partition by yr order by cnt desc) r from (
+		select primary_type, count(*) cnt, yr from crime_parquet_16_20 group by yr, primary_type) s
+	) t
+  where r <= 10;
+  ```
+  - b. Which locations are most likely for a crime to happen?  
+  ```sql
+  select loc_desc, count(*) cnt from crime_parquet_16_20
+  group by loc_desc
+  order by cnt desc
+  limit 10;
+  ```
+  <img src="https://github.com/hao5959/python/blob/master/Hadoop/images/q2.3.b.png" width="50%">
+  
