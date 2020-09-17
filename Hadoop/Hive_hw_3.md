@@ -74,7 +74,7 @@ insert into table crime_parquet_16_20 partition (yr=2016) select
     loc
 from chicago.crime_parquet where yr = 2016;
 ```
-- 3
+- 3. Write queries to answer following questions:
   - a. Which type of crime is most occurring for each year?
   ```sql
   select t.primary_type, t.yr, cnt, r from (
@@ -106,7 +106,20 @@ from chicago.crime_parquet where yr = 2016;
 	) s 
   )t where rank = 1;
   ```
-  
+  ```sql
+  select loc_desc, primary_type, cnt_rank from (
+  select loc_desc, primary_type, rank() over(partition by loc_desc order by ratio) cnt_rank from (
+	  select loc_desc, primary_type, round(type_cnt*100/loc_cnt, 2) ratio from (
+		select 
+			loc_desc, 
+			primary_type, 
+			count(*) over(partition by loc_desc) loc_cnt,
+			count(*) over(partition by loc_desc, primary_type) type_cnt
+		from crime_parquet_16_20) s 
+	)t 
+  ) f where cnt_rank = 1;
+  ```
+  <img src="https://github.com/hao5959/python/blob/master/Hadoop/images/q2.3.3.png" width="50%">
 ### Reatil_DB
 -1. List all orders with total order_items = 5.
 ```sql
@@ -142,6 +155,16 @@ where orders.order_id in (
  return 14665
  ```
 -4. List top 10 most popular product categories.
+```sql
+select category_name, sum(oi.order_item_quantity) cnt 
+from categories c
+join products p on p.product_category_id = c.category_id
+join order_items oi on oi.order_item_product_id = p.product_id
+group by c.category_name
+order by cnt desc
+limit 10;
+```
+<img src="https://github.com/hao5959/python/blob/master/Hadoop/images/q3.4.png" width="50%">
 -5. List top 10 revenue generating products.
 ```sql
 select 
@@ -155,3 +178,4 @@ group by p.product_name
 order by revenue desc
 limit 10;
 ```
+<img src="https://github.com/hao5959/python/blob/master/Hadoop/images/q3.5.png" width="50%">
