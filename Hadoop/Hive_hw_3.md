@@ -108,7 +108,7 @@ from chicago.crime_parquet where yr = 2016;
   ```
   ```sql
   select loc_desc, primary_type, cnt_rank from (
-  select loc_desc, primary_type, rank() over(partition by loc_desc order by ratio) cnt_rank from (
+      select loc_desc, primary_type, rank() over(partition by loc_desc order by ratio) cnt_rank from (
 	  select loc_desc, primary_type, round(type_cnt*100/loc_cnt, 2) ratio from (
 		select 
 			loc_desc, 
