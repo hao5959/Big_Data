@@ -98,7 +98,7 @@ from chicago.crime_parquet where yr = 2016;
   ```sql
   select loc_desc, ratio, primary_type from (
 	select loc_desc, rank() over(partition by loc_desc order by ratio) rank, ratio, primary_type from (
-		select x.cnt*100/y.total_cnt ratio, x.loc_desc, x.primary_type from 
+		select round(x.cnt*100/y.total_cnt, 0) ratio, x.loc_desc, x.primary_type from 
 			(select loc_desc, primary_type, count(*) cnt from crime_parquet_16_20 group by loc_desc, primary_type) x
 		join 
 			(select loc_desc, count(*) total_cnt from crime_parquet_16_20 group by loc_desc) y
