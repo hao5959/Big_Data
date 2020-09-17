@@ -166,6 +166,7 @@ limit 10;
 ```
 <img src="https://github.com/hao5959/python/blob/master/Hadoop/images/q3.4.png" width="50%">
 -5. List top 10 revenue generating products.
+
 ```sql
 select 
     sum(order_item_subtotal) revenue,
