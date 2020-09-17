@@ -84,6 +84,7 @@ from chicago.crime_parquet where yr = 2016;
   where r <= 10;
   ```
   <img src="https://github.com/hao5959/python/blob/master/Hadoop/images/q2.3.a.png" width="50%">
+  
   - b. Which locations are most likely for a crime to happen?  
   ```sql
   select loc_desc, count(*) cnt from crime_parquet_16_20
@@ -93,7 +94,7 @@ from chicago.crime_parquet where yr = 2016;
   ```
   <img src="https://github.com/hao5959/python/blob/master/Hadoop/images/q2.3.b.png" width="50%">
   
-  -c. Are there certain high crime rate locations for certain crime types?
+  - c. Are there certain high crime rate locations for certain crime types?
   ```sql
   select loc_desc, ratio, primary_type from (
 	select loc_desc, rank() over(partition by loc_desc order by ratio) rank, ratio, primary_type from (
@@ -107,7 +108,7 @@ from chicago.crime_parquet where yr = 2016;
   ```
   
 ### Reatil_DB
-- 1. List all orders with total order_items = 5.
+-1. List all orders with total order_items = 5.
 ```sql
 select o.order_id, sum(oi.order_item_quantity) cnt from orders o
 left join order_items oi 
@@ -118,7 +119,7 @@ having sum(oi.order_item_quantity) = 5;
 ```
 return 5806
 ```
-- 2/3. List customer_fname，customer_id, order_id, order item_count with total order_items = 5.
+-2/3. List customer_fname，customer_id, order_id, order item_count with total order_items = 5.
 ```sql
 select 
     c.customer_fname customer_fname, 
@@ -140,8 +141,8 @@ where orders.order_id in (
  ```
  return 14665
  ```
-- 4. List top 10 most popular product categories.
-- 5. List top 10 revenue generating products.
+-4. List top 10 most popular product categories.
+-5. List top 10 revenue generating products.
 ```sql
 select 
     sum(order_item_subtotal) revenue,
