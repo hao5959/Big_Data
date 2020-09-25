@@ -3,6 +3,23 @@
 ### Banklist
 - Top 5 states with most banks.
 ```sql
+create table banklist_parquet (
+    bank_name string,
+    city string,
+    st string,
+    cert string, 
+    acquiring_institution string,
+    closing_date string)
+stored as parquet;
+
+insert into table banklist_parquet select
+    bank_name,
+    city,
+    st,
+    cert, 
+    acquiring_institution,
+    from_unixtime(unix_timestamp(`closing_date` , 'dd-MMM-yy'))
+from banklist;
 select b.st st, count(b.bank_name) count from banklist_parquet b
 group by b.st
 order by count desc
