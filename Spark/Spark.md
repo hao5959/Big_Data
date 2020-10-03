@@ -98,7 +98,57 @@ sc.stop()
 // Create Map
 // Collect Result
 ```
-##### Partition
+slides  
+```markdown
+Quick: memory computing  
+Lazy Evalution: optimize execution plan, return action when you want to get the result  
+```
+- Spark application: Driver & Executors
+```markdown
+Driver:
+- Maintaining information about the spark application during the lifetime of the app
+- Responding to a user's program or input 
+- Analyzing, distributing, and scheduling work across the executors
+Executors:
+- Do the work that the driver assigns to them
+- Static/ Dynamic allocation
+```
+#### Spark Key Concepts
+- SparkSession
+```markdown
+spark -> sparkSession -> functions
+```
+- DataFrame
+```scala
+/* Represents a table of data with rows and columns, 
+   not a strong type */
+Type DataFrame = Dataset[Row] Datasets containing Row Obj
+```
+- DateFrame Partitions
+- DataSet 
+```
+Strongly typed collection of domain-specific objects that 
+can be transformed in parallel using functional or relational 
+operations (only available to Java/Scala)
+```
+- 2 kinds of API 
+```
+- Transformations:
+    - Lazy Evaluation
+        - predicate pushdown
+        - spark compile a execution paln from raw transformations and optimize the pipeline, improve efficiency
+    - Two types:
+        - Narrow:
+        - Wide dependencies:
+- Actions:
+```
+
+```scala 
+val path = "/data/spark/flight-data/json/2010-summary.json"
+val df = spark.read.format("json").load(path)
+df.show(5, false)
+```
+
 
 
 
