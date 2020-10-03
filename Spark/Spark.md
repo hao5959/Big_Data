@@ -1,6 +1,6 @@
 # SPARK
 ##### Structure
-```markdown
+```
    SparkSQL  	    SparkStreaming		Mlib		GraphX
 structured data      realtime cal
           \             |                /          /
@@ -19,7 +19,7 @@ Driver
   - 支持分区
 - Datasets
 
-```markdown
+```
 1. List or Set of partitions  
 2. A function for computing each split
 3. List of dependencies on other (parent) RDD
@@ -38,7 +38,7 @@ Driver
 use Spark API to create RDD  
 Spark Core entry point: SC
 
-```scala
+```
 Transformation  转换操作 惰性操作 map, flatMap, filter...
 Action  动作操作 reduce, collect...
 ```
@@ -86,12 +86,12 @@ sc.stop()
 // Collect Result
 ```
 
-```markdown
+```
 Quick: memory computing  
 Lazy Evalution: optimize execution plan, return action when you want to get the result  
 ```
 - Spark application: Driver & Executors
-```markdown
+```
 Driver:
 - Maintaining information about the spark application during the lifetime of the app
 - Responding to a user's program or input 
@@ -102,7 +102,7 @@ Executors:
 ```
 #### Spark Key Concepts
 - SparkSession
-```markdown
+```
 entry point to programming spark with dataset and dataframe API
 spark -> sparkSession -> functions
 ```
