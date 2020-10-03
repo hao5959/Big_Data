@@ -1,9 +1,5 @@
 # SPARK
-
-##### DAG
-
 ##### Structure
-
 ```markdown
    SparkSQL  	    SparkStreaming		Mlib		GraphX
 structured data      realtime cal
@@ -15,11 +11,7 @@ Submit task to client
 SparkSubmit()  		-----> Cluster Manager -----> WORKER executor (run spark task)  
 Driver  
 ```
-sc: spark core RDD 执行入口  
-spark context  
-
 ##### RDD
-
 - Resilient
   - 容错
   - 可以缓存在内存和磁盘, 或外部存储
@@ -98,7 +90,7 @@ sc.stop()
 // Create Map
 // Collect Result
 ```
-slides  
+
 ```markdown
 Quick: memory computing  
 Lazy Evalution: optimize execution plan, return action when you want to get the result  
@@ -116,34 +108,47 @@ Executors:
 #### Spark Key Concepts
 - SparkSession
 ```markdown
+entry point to programming spark with dataset and dataframe API
 spark -> sparkSession -> functions
 ```
 - DataFrame
 ```scala
 /* Represents a table of data with rows and columns, 
    not a strong type */
-Type DataFrame = Dataset[Row] Datasets containing Row Obj
+Type DataFrame = Dataset[Row] //Datasets containing Row Obj
 ```
 - DateFrame Partitions
+```
+spark break data into chunks(big dataset to small datasets)
+represent how data is physically distributed across the cluster of machines during execution
+```
+```
+spark application essentiaally is to apply operations to Partitions
+```
 - DataSet 
 ```
-Strongly typed collection of domain-specific objects that 
-can be transformed in parallel using functional or relational 
-operations (only available to Java/Scala)
+Strongly typed collection of domain-specific objects that can be transformed in parallel using functional or relational operations (only available to Java/Scala)
 ```
-- 2 kinds of API 
+- 2 kinds of API/ Operations
 ```
-- Transformations:
+- Transformations: 
+    allow us to build up execution plan
     - Lazy Evaluation
         - predicate pushdown
         - spark compile a execution paln from raw transformations and optimize the pipeline, improve efficiency
     - Two types:
-        - Narrow:
-        - Wide dependencies:
+        - Narrow: 1 partition -> 1 partition
+        - Wide dependencies: data shuffling too much; will create new stage
 - Actions:
+    trigger the computation
+    - View data in the console
+    - Collect data to native object in the repective language
+    - Write to output data source
 ```
 
 ```scala 
+//catalog  operations related to metadata
+spark.conf.getAll
 val path = "/data/spark/flight-data/json/2010-summary.json"
 val df = spark.read.format("json").load(path)
 df.show(5, false)

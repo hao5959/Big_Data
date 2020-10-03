@@ -59,8 +59,8 @@ val m = Map(("a", 1), ("b", 2))
 ```
 ```scala
 // calculate words count
-val words: Array[String] = Array("Hello Tom", "Hello Jerry", "Hello Tom", "Hello Tom", "hello World", "Hello Jerry")
-// val words = Array("Hello Tom", "Hello Jerry", "Hello Tom", "Hello Tom", "hello World", "Hello Jerry")
+val words: Array[String] = Array("Hello Scala", "Hello Spark", "Hello Scala", "Hello Scala", "hello World", "Hello Spark")
+// val words = Array("Hello Scala", "Hello Spark", "Hello Scala", "Hello Scala", "hello World", "Hello Spark")
 words.map(x => x.split(" ")).flatten
 words.flatMap(_.split(" ")).map((_, 1)).groupBy(_._1).map(t => (t._1, t._2.length)).toList.sortBy(_._2).reverse
 ```
