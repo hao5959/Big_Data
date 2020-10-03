@@ -41,7 +41,7 @@ Pipeline established and the data is written into multiple data nodes
 (client writes block to the first datanode, first datanode forward data to next in the pipeline)
 Close file upon finish
 ```
-- <span style="color: rgb(35, 205, 182);">SPOF</span>
+- SPOF   
 ```
 solution: **High Availablility(HA)**
 Use ZooKeeper to ensure that only one Namenode is active

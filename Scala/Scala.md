@@ -70,3 +70,5 @@ arr.reduce(_+_)
 arr.fold(100)(_+_)
 ``` 
 #### parallel collections
+
+[ :point_up: ](#Hadoop) TOP
