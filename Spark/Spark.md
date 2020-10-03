@@ -4,7 +4,7 @@
    SparkSQL  	    SparkStreaming		Mlib		GraphX
 structured data      realtime cal
           \             |                /          /
-				APACHE SPARK (spark core)
+			APACHE SPARK (spark core)
 ```
 ```
 Submit task to client  
@@ -28,11 +28,11 @@ Driver
 // 保存RDD之间的依赖关系
 // checkpoint 直接将RDD的数据存放在外部存储系统, 出现问题直接读取
 - properties
-A list of partitions
-A function for computing each split
-A list of dependencies on other RDDs
-Optionally, a Partitoner for key-value RDDs(e.g. to say that the RDD is hash-partitioned)
-Optionally, a list of preferred locations to compute each split on(e.g. block locations for an HDFS file)
+    A list of partitions
+    A function for computing each split
+    A list of dependencies on other RDDs
+    Optionally, a Partitoner for key-value RDDs(e.g. to say that the RDD is hash-partitioned)
+    Optionally, a list of preferred locations to compute each split on(e.g. block locations for an HDFS file)
 ```
 
 use Spark API to create RDD  
@@ -110,11 +110,11 @@ spark -> sparkSession -> functions
 ```scala
 /* Represents a table of data with rows and columns, 
    not a strong type */
-Type DataFrame = Dataset[Row] //Datasets containing Row Obj
+Type DataFrame = Dataset[Row] // Datasets containing Row Obj
 ```
 - DateFrame Partitions
 ```
-spark break data into chunks(big dataset to small datasets)
+spark break data into chunks (big dataset to small datasets)
 represent how data is physically distributed across the cluster of machines during execution
 ```
 ```
