@@ -3,8 +3,8 @@
 ```markdown
    SparkSQL  	    SparkStreaming		Mlib		GraphX
 structured data      realtime cal
-          \             |                |          /
-				    APACHE SPARK (spark core)
+          \             |                /          /
+				APACHE SPARK (spark core)
 ```
 ```
 Submit task to client  
@@ -16,34 +16,29 @@ Driver
   - 容错
   - 可以缓存在内存和磁盘, 或外部存储
 - Distributed
- -支持分区
+  - 支持分区
 - Datasets
 
 ```markdown
-1. RDD是数据集
-2. RDD是编程模型
-3. RDD dependencies
-4. RDD是可以分区的  
-5. RDD IS READ ONLY  
-6. RDD 是可以容错的  
+1. List or Set of partitions  
+2. A function for computing each split
+3. List of dependencies on other (parent) RDD
+4. RDD is an immutable, partitioned collection of elements on the cluster which can be operated in parallel
+5. Fault Tolerant
 // 保存RDD之间的依赖关系
 // checkpoint 直接将RDD的数据存放在外部存储系统, 出现问题直接读取
-```
-
-```scala
-属性
-partition list
-compute function
-RDD dependencies
-partitoner
-preferred location
+- properties
+A list of partitions
+A function for computing each split
+A list of dependencies on other RDDs
+Optionally, a Partitoner for key-value RDDs(e.g. to say that the RDD is hash-partitioned)
+Optionally, a list of preferred locations to compute each split on(e.g. block locations for an HDFS file)
 ```
 
 use Spark API to create RDD  
 Spark Core entry point: SC
 
 ```scala
-两类算子
 Transformation  转换操作 惰性操作 map, flatMap, filter...
 Action  动作操作 reduce, collect...
 ```
