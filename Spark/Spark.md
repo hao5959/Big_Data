@@ -3,8 +3,8 @@
 ```markdown
    SparkSQL  	    SparkStreaming		Mlib		GraphX
 structured data      realtime cal
-          \             |              /          /
-				APACHE SPARK (spark core)
+          \             |                |          /
+				    APACHE SPARK (spark core)
 ```
 ```
 Submit task to client  
