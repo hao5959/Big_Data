@@ -1,0 +1,4 @@
+- REGEXP
+- SUBSTR
+- TRUNCATE vs ROUND
+- Occupation (pivot and agg)

@@ -90,6 +90,9 @@ sc.stop()
 Quick: memory computing  
 Lazy Evalution: optimize execution plan, return action when you want to get the result  
 ```
+```
+Logical Optimization: Lazy Evaluation and DAG
+```
 - Spark application: Driver & Executors
 ```
 Driver:
@@ -106,10 +109,16 @@ Executors:
 entry point to programming spark with dataset and dataframe API
 spark -> sparkSession -> functions
 ```
+- DataSet 
+```
+Strongly typed collection of domain-specific objects that can be transformed in parallel using functional or relational operations (only available to Java/Scala)
+check type at compile time
+```
 - DataFrame
 ```scala
 /* Represents a table of data with rows and columns, 
-   not a strong type */
+   not a strong type 
+   Spark checks whether data conforms to the data type specified in schema at runtime*/
 Type DataFrame = Dataset[Row] // Datasets containing Row Obj
 ```
 - DateFrame Partitions
@@ -120,10 +129,7 @@ represent how data is physically distributed across the cluster of machines duri
 ```
 spark application essentiaally is to apply operations to Partitions
 ```
-- DataSet 
-```
-Strongly typed collection of domain-specific objects that can be transformed in parallel using functional or relational operations (only available to Java/Scala)
-```
+
 - 2 kinds of API/ Operations
 ```
 - Transformations: 
@@ -149,12 +155,52 @@ val df = spark.read.format("json").load(path)
 df.show(5, false)
 ```
 
+#### Structured API
+- Schema
+```
+A schema defines the column names and types of a DataFrame
+    schema-on-read(Parquet, AVRO, infer from JSON, CVS)
+    Explicitly define it(Create a StructType object)
+        StructType: a list of StructField
+        StructField: name, type, nullable
+```
+```scala
+dataframe.take(n: Int)/ takeAsList()
+dataframe.first
+```
+- DataFrame Transformation 
+```
+3 common ways to create a DataFrame
+    from file
+    from table
+    take a set of rows to convert them to a dataframe
 
+    spark.catalog 
+    // meatadata in catalog 
+    // stastistic generate catalog
+    // analyze table table_name [partition(par_cols)] compute statistic [noscan] 
+    Hive and Spark :point_up:
+    Impala: compute stats
 
+    withColumn // add column
+    sample true: 放回 false: 不放回
+```
 
+- Spark Data Sources
+```
+read: DataFrameReader
+readStream: DataStreamReader
 
+DataFrameReader is accessible from SparkSession.
+After we have a DataFrame reader, specify: format, schema, A series of options
+spark.read.format().option().option().schema().load()
 
-
+- write data
+DataFrameWirter
+def wirteStream: DataStreamWriter
+accessible from DataFrame
+df.write.format().option().option().partitonBy().bucketBy().sortBy().save()
+```
 
 
 
